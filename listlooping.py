@@ -16,8 +16,4 @@ print(min(numbers),max(numbers),sum(numbers))
 print(comp_numbers)
 
 
-players = ["charles", "martina","jack", "michael", "florence", "eli"]
-first_three_players = players[:3]
-print(f'Here are the first {len(first_three_players)} players on my team:')
-for player in first_three_players:
-    print(player.title())
+
