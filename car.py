@@ -1,3 +1,5 @@
+"""A class that can be used to represent a car."""
+
 class Car:
     """A simple attempt to represent a car."""
 
@@ -20,3 +22,7 @@ class Car:
     def update_odometer(self, mileage):
         """Update odometer_reading"""
         self.odometer_reading = mileage
+        
+    def fill_gas_tank(self):
+      """Fill gas tank method"""
+      print(f"The tank has been filled with {self.odometer_reading} litres.")
