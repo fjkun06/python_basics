@@ -22,14 +22,14 @@ class AlienInvasion:
         self.ship = Ship(self)
         pygame.display.set_caption("Alien Invasion")
 
-        # running flag
-        self._running = True
+        # current song index
+        self.current_index = 0
         # Play Background sound
-        # media_player(self._running)
+        music_player(0)
 
     def run_game(self):
         """Start the main loop for the game."""
-        while self._running:
+        while True:
             # Watch for keyboard and mouse events
             self._check_events()
             self.ship.update()
@@ -37,12 +37,13 @@ class AlienInvasion:
             self._update_screens()
             # Make the most recently drawn screen visible
             self.clock.tick(60)
+            # Make the most recently drawn screen visible
+            media_player(self)
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self._running = False
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
