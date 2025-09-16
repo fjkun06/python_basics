@@ -9,3 +9,6 @@ class Settings:
 
         # Set the background color
         self.bg_color = (230, 230, 230)
+
+        # Ship speed settings
+        self.ship_speed = 3.5
