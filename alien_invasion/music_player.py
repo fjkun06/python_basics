@@ -23,20 +23,19 @@ def _update_player(index):
     music_player(index % len(playlist))
 
 
-def media_player(ai_game):
+def media_player(ai_game,event):
     """Control all music ops"""
-
     # Pause music
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
-        if event.type == pygame.USEREVENT:
-            ai_game.current_index += 1
-            _update_player(ai_game.current_index)
+    # for event in pygame.event.get():
+    # if event.type == pygame.QUIT:
+    #     sys.exit()
+    if event.type == pygame.USEREVENT:
+        ai_game.current_index += 1
+        _update_player(ai_game.current_index)
 
-        elif event.type == pygame.KEYDOWN:
-            _play_pause_toggle(event)
-            _next_previous_toggle(event, ai_game)
+    elif event.type == pygame.KEYDOWN:
+        _play_pause_toggle(event)
+        _next_previous_toggle(event, ai_game)
 
 
 def _play_pause_toggle(event):

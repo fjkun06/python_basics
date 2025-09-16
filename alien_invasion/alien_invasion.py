@@ -37,8 +37,6 @@ class AlienInvasion:
             self._update_screens()
             # Make the most recently drawn screen visible
             self.clock.tick(60)
-            # Make the most recently drawn screen visible
-            media_player(self)
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
@@ -60,6 +58,8 @@ class AlienInvasion:
                 if event.key == pygame.K_LEFT:
                     # Move the ship to the left
                     self.ship.moving_left = False
+            # Give Media Player access to current event loop
+            media_player(self, event)
 
     def _update_screens(self):
         """Update images on the screen, and flip to the new screen."""
