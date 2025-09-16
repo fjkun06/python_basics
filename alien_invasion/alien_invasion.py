@@ -4,6 +4,9 @@ import pygame
 # custom modules
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
+
+# extra modules
 from music_player import music_player, media_player
 
 
@@ -24,6 +27,7 @@ class AlienInvasion:
         # self.settings.screen_height = self.screen.get_rect().height
         self.clock = pygame.time.Clock()  #
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
         pygame.display.set_caption("Alien Invasion")
 
         # current song index
@@ -37,16 +41,21 @@ class AlienInvasion:
             # Watch for keyboard and mouse events
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             # Redraw the screen during each pass through the loop.
             self._update_screens()
             # Make the most recently drawn screen visible
             self.clock.tick(60)
+            # self._fire_bullets()
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self._fire_bullets()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
 
@@ -65,6 +74,13 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_KP0:
+            self._fire_bullets()
+
+    def _fire_bullets(self):
+        """Create a new bullet and add it to the bullets group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -78,6 +94,8 @@ class AlienInvasion:
     def _update_screens(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         self.ship.blitme()
         pygame.display.flip()
 
